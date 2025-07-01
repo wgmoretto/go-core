@@ -100,3 +100,6 @@ For projects requiring extensive scalability, complexity, and enterprise-level r
 * **Comprehensive Testing Suite**
 
 Refer to the [Enterprise-Level Go Structure] (#HIGH_LEVEL_STRUCT.md) for full details.
+
+## 📚 Documentation
+For detailed documentation on the architecture, design decisions, and usage, please refer to the [docs](docs/) directory.
