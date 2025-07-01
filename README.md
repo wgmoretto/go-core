@@ -71,51 +71,6 @@ make build        # Builds the application
 make test         # Runs all tests
 ```
 
----
-
-## ⚡️ Creating the Structure (Makefile)
-
-Create a `Makefile` at the root of your project with the following content:
-
-```makefile
-setup:
-	mkdir -p cmd/api cmd/migrate
-	mkdir -p internal/{domain/{entities,repositories,services},adapters/{database,cache,external},handlers/http,config}
-	mkdir -p pkg/logger
-	mkdir -p api
-	mkdir -p configs
-	mkdir -p deployments/{docker,kubernetes}
-	mkdir -p scripts
-	mkdir -p tests/{unit,integration}
-	touch cmd/api/main.go cmd/migrate/main.go
-	touch internal/domain/entities/user.go internal/domain/repositories/user_repository.go internal/domain/services/user_service.go
-	touch internal/adapters/database/postgres.go internal/adapters/cache/redis.go internal/adapters/external/payment_gateway.go
-	touch internal/handlers/http/{user_handler.go,routes.go,middleware.go}
-	touch internal/config/config.go
-	touch pkg/logger/logger.go
-	touch api/openapi.yaml
-	touch configs/local.yaml configs/production.yaml
-	touch deployments/docker/Dockerfile deployments/kubernetes/deployment.yaml
-	touch scripts/build.sh scripts/migrate.sh
-	touch tests/unit/.gitkeep tests/integration/.gitkeep
-	touch go.mod go.sum README.md
-	chmod +x scripts/*.sh
-
-echo:
-	@echo "Structure successfully created!"
-
-build:
-	go build -o bin/app ./cmd/api
-
-dev:
-	go run ./cmd/api
-
-test:
-	go test ./...
-```
-
----
-
 ## 📌 Architectural Principles Applied
 
 * **Clean Architecture**: Clear separation of responsibilities.
