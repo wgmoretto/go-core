@@ -103,3 +103,10 @@ Refer to the [Enterprise-Level Go Structure] (#HIGH_LEVEL_STRUCT.md) for full de
 
 ## 📚 Documentation
 For detailed documentation on the architecture, design decisions, and usage, please refer to the [docs](docs/) directory.
+
+## 📦 Dependencies
+For managing dependencies, this project uses Go modules. You can add new dependencies using:
+
+```bash
+go get <package-name>
+```
