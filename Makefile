@@ -10,35 +10,49 @@ setup:
 	powershell -Command "New-Item -Path deployments/docker, deployments/kubernetes -ItemType Directory -Force"
 	powershell -Command "New-Item -Path scripts -ItemType Directory -Force"
 	powershell -Command "New-Item -Path tests/unit, tests/integration -ItemType Directory -Force"
-	powershell -Command "New-Item cmd/api/main.go, cmd/migrate/main.go -Force"
-	powershell -Command "New-Item internal/domain/entities/user.go -Force"
-	powershell -Command "New-Item internal/domain/repositories/user_repository.go -Force"
-	powershell -Command "New-Item internal/domain/services/user_service.go -Force"
-	powershell -Command "New-Item internal/adapters/database/postgres.go, internal/adapters/cache/redis.go, internal/adapters/external/payment_gateway.go -Force"
-	powershell -Command "New-Item internal/handlers/http/user_handler.go, internal/handlers/http/routes.go, internal/handlers/http/middleware.go -Force"
-	powershell -Command "New-Item internal/config/config.go -Force"
-	powershell -Command "New-Item pkg/logger/logger.go -Force"
-	powershell -Command "New-Item api/openapi.yaml -Force"
-	powershell -Command "New-Item configs/local.yaml, configs/production.yaml -Force"
-	powershell -Command "New-Item deployments/docker/Dockerfile, deployments/kubernetes/deployment.yaml -Force"
-	powershell -Command "New-Item scripts/build.sh, scripts/migrate.sh -Force"
-	powershell -Command "New-Item tests/unit/.gitkeep, tests/integration/.gitkeep -Force"
-	powershell -Command "New-Item go.mod, go.sum, README.md -Force"
+	powershell -Command "Set-Content -Path cmd/api/main.go -Value 'package main'"
+	powershell -Command "Set-Content -Path cmd/migrate/main.go -Value 'package main'"
+	powershell -Command "Set-Content -Path internal/domain/entities/user.go -Value 'package entities'"
+	powershell -Command "Set-Content -Path internal/domain/repositories/user_repository.go -Value 'package repositories'"
+	powershell -Command "Set-Content -Path internal/domain/services/user_service.go -Value 'package services'"
+	powershell -Command "Set-Content -Path internal/adapters/database/postgres.go -Value 'package database'"
+	powershell -Command "Set-Content -Path internal/adapters/cache/redis.go -Value 'package cache'"
+	powershell -Command "Set-Content -Path internal/adapters/external/payment_gateway.go -Value 'package external'"
+	powershell -Command "Set-Content -Path internal/handlers/http/user_handler.go -Value 'package http'"
+	powershell -Command "Set-Content -Path internal/handlers/http/routes.go -Value 'package http'"
+	powershell -Command "Set-Content -Path internal/handlers/http/middleware.go -Value 'package http'"
+	powershell -Command "Set-Content -Path internal/config/config.go -Value 'package config'"
+	powershell -Command "Set-Content -Path pkg/logger/logger.go -Value 'package logger'"
+	powershell -Command "New-Item -Path api/openapi.yaml -Force"
+	powershell -Command "New-Item -Path configs/local.yaml, configs/production.yaml -Force"
+	powershell -Command "New-Item -Path deployments/docker/Dockerfile, deployments/kubernetes/deployment.yaml -Force"
+	powershell -Command "New-Item -Path scripts/build.sh, scripts/migrate.sh -Force"
+	powershell -Command "New-Item -Path tests/unit/.gitkeep, tests/integration/.gitkeep -Force"
+	powershell -Command "New-Item -Path go.mod, go.sum, README.md -Force"
 	echo "Structure successfully created on Windows!"
 else
 setup:
 	mkdir -p cmd/api cmd/migrate
 	mkdir -p internal/{domain/{entities,repositories,services},adapters/{database,cache,external},handlers/http,config}
 	mkdir -p pkg/logger api configs deployments/{docker,kubernetes} scripts tests/{unit,integration}
-	touch cmd/api/main.go cmd/migrate/main.go
-	touch internal/domain/entities/user.go internal/domain/repositories/user_repository.go internal/domain/services/user_service.go
-	touch internal/adapters/database/postgres.go internal/adapters/cache/redis.go internal/adapters/external/payment_gateway.go
-	touch internal/handlers/http/{user_handler.go,routes.go,middleware.go}
-	touch internal/config/config.go pkg/logger/logger.go api/openapi.yaml
+	echo "package main" > cmd/api/main.go
+	echo "package main" > cmd/migrate/main.go
+	echo "package entities" > internal/domain/entities/user.go
+	echo "package repositories" > internal/domain/repositories/user_repository.go
+	echo "package services" > internal/domain/services/user_service.go
+	echo "package database" > internal/adapters/database/postgres.go
+	echo "package cache" > internal/adapters/cache/redis.go
+	echo "package external" > internal/adapters/external/payment_gateway.go
+	echo "package http" > internal/handlers/http/user_handler.go
+	echo "package http" > internal/handlers/http/routes.go
+	echo "package http" > internal/handlers/http/middleware.go
+	echo "package config" > internal/config/config.go
+	echo "package logger" > pkg/logger/logger.go
+	touch api/openapi.yaml
 	touch configs/local.yaml configs/production.yaml
 	touch deployments/docker/Dockerfile deployments/kubernetes/deployment.yaml
 	touch scripts/build.sh scripts/migrate.sh
-	touch tests/unit/.gitkeep tests/integration/.gitkeep go.mod go.sum README.md
+	touch tests/unit/.gitkeep tests/integration/.gitkeep
 	chmod +x scripts/*.sh
 	echo "Structure successfully created on Unix/Linux!"
 endif
